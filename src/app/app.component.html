@@ -1,0 +1,126 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="https://azure.microsoft.com/es-es/services/cognitive-services/text-analytics/" target="_blank"> Text Analytics Azure</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/directivas">Directivas</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/clientes">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+<div class="principal">
+<pre></pre>
+    <p class="parrafo" style="text-align: left;" >
+      Extrae conocimientos en texto no estructurado mediante el procesamiento del lenguaje natural (PNL), sin necesidad de conocimientos de aprendizaje automático. Obtenga una comprensión más profunda de las opiniones de los clientes con el análisis de sentimientos. Identifique frases y entidades clave como personas, lugares y organizaciones para comprender temas y tendencias comunes. Clasifique la terminología médica utilizando modelos previamente entrenados y específicos del dominio. Evaluar texto en una amplia gama de idiomas.</p>
+      
+        <p >Análisis de los sentimientos</p>
+            <div class="contenedor">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ingrese un Comentario</mat-label>
+                    <textarea matInput [(ngModel)]="input"></textarea>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" [disabled]="!input" (click)="analizarSentimiento()">Enviar</button>
+            </div>
+            <div class="contenedor" *ngFor="let datos of listaResponse">
+                <mat-card>{{ datos.texto }} - {{ datos.emoji }}</mat-card>
+            </div>
+          
+          
+          <p >Detección de idioma</p>
+     
+            <div class="contenedor">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ingrese un Comentario</mat-label>
+                    <textarea matInput [(ngModel)]="inputLenguaje"></textarea>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" [disabled]="!inputLenguaje" (click)="detectarLeguaje()">Enviar</button>
+            </div>
+            <div class="contenedor" *ngFor="let datos of listaLenguajes">
+                <mat-card>
+                    <p>{{ datos.texto }}</p>
+                    <p style="font-weight: bold;">Lenguaje : {{ datos.lenguaje }}</p>
+                </mat-card>
+            </div>
+        
+            <p >Reconocer palabras Clave</p>   
+   
+            <div class="contenedor">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ingrese un Comentario</mat-label>
+                    <textarea matInput [(ngModel)]="inputPalabra"></textarea>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" [disabled]="!inputPalabra" (click)="reconocerPalabras()">Enviar</button>
+            </div>
+            <div class="contenedor">
+                <mat-card>
+                    {{ palabraClave?.texto }}
+                    <div *ngFor="let datos of palabraClave?.palabras">
+                        <li style="font-weight: bold;">{{ datos }}</li>
+                    </div>
+                </mat-card>
+            </div>
+      
+            <p >Reconocer las Entidades</p> 
+        
+            <div class="contenedor">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Ingrese un Comentario</mat-label>
+                    <textarea matInput [(ngModel)]="inputEntidad"></textarea>
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" [disabled]="!inputEntidad" (click)="reconocerEntidades()">Enviar</button>
+            </div>
+            <div class="contenedor">
+                <mat-card>
+                    {{ entidad?.text }}
+                    <div *ngFor="let datos of entidad?.entidades">
+                        <li style="font-weight: bold;">{{ datos.entidad }} - {{ datos.categoria }}</li>
+                    </div>
+                </mat-card>
+            </div>
+     
+
+</div>
+
+<footer class="footer bg-dark rounded-top text-center">
+  <div class="container py-2">
+    <p class="text-white my-2">
+      &copy; Victor Sandoval
+    </p>
+  </div>
+</footer>
